@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  bugbounty-mcp:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: bugbounty-mcp
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MCP_HOST=0.0.0.0
+      - MCP_PORT=8765
+    ports:
+      - "8765:8765"
+    volumes:
+      - ./config:/app/config
+      - ./output:/app/output
+      - /tmp:/tmp
+    networks:
+      - bugbounty
+
+  # Optional: Burp Suite Pro API (requires license)
+  burp:
+    image: caireme/burp-restapi:latest
+    container_name: burp-api
+    environment:
+      - JAVA_OPTS=-Xmx2048m
+    ports:
+      - "1337:1337"
+    networks:
+      - bugbounty
+    # Uncomment if you have Burp Suite Pro license
+    # volumes:
+    #   - /path/to/burp.jar:/opt/burpsuite/BurpSuitePro.jar
+
+networks:
+  bugbounty:
+    driver: bridge
