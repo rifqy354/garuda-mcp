@@ -1,0 +1,26 @@
+# BugBounty MCP Configuration
+
+mcp:
+  host: "0.0.0.0"
+  port: 8765
+
+burp:
+  host: "localhost"
+  port: 1337
+  # api_key: "your-burp-api-key"
+
+ghidra:
+  install_path: "/opt/ghidra"
+  projects_dir: "/tmp/ghidra_projects"
+  # headless_path: "/opt/ghidra/support/analyzeHeadless"
+
+tools:
+  projectdiscovery_path: "/root/go"
+  nuclei_templates: "/opt/nuclei-templates"
+  wordlists: "/usr/share/wordlists"
+
+database:
+  path: "/tmp/bugbounty_mcp.db"
+
+debug: false
+verbose: false

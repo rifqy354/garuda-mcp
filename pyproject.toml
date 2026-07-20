@@ -1,20 +1,15 @@
-{
-  "name": "bugbounty-mcp",
-  "version": "0.1.0",
-  "description": "A modern, modular MCP server for bug bounty hunting and security research",
-  "authors": [{"name": "Your Name", "email": "you@example.com"}],
-  "license": "MIT",
-  "readme": "README.md",
-  "requires-python": ">=3.11",
-  "keywords": [
-    "bug-bounty",
-    "security",
-    "mcp",
-    "pentest",
-    "recon",
-    "vulnerability-scanner"
-  ],
-  "classifiers": [
+[project]
+name = "garuda-mcp"
+version = "0.1.0"
+description = "A modern, modular MCP server for bug bounty hunting and security research"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "rifqy354", email = "rifqy354@users.noreply.github.com"}
+]
+keywords = ["bug-bounty", "security", "mcp", "pentest", "recon", "vulnerability-scanner"]
+classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "Intended Audience :: Information Technology",
@@ -23,8 +18,9 @@
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-  ],
-  "dependencies": [
+]
+
+dependencies = [
     "fastmcp>=0.1.0",
     "pydantic>=2.0.0",
     "pydantic-settings>=2.0.0",
@@ -34,32 +30,48 @@
     "typer>=0.9.0",
     "pyyaml>=6.0.0",
     "jinja2>=3.1.0",
-    "playwright>=1.40.0",
-  ],
-  "optional-dependencies": {
-    "dev": [
-      "pytest>=7.4.0",
-      "pytest-asyncio>=0.21.0",
-      "ruff>=0.1.0",
-      "mypy>=1.7.0",
-      "pre-commit>=3.5.0",
-    ],
-    "burp": [
-      "burp-rest-api>=2.0.0",
-    ],
-  },
-  "scripts": {
-    "server": "python -m bugbounty_mcp.server",
-    "test": "pytest tests/ -v",
-    "lint": "ruff check src/",
-    "format": "ruff format src/",
-    "typecheck": "mypy src/",
-  },
-  "entry_points": {
-    "bugbounty-mcp": "bugbounty_mcp.cli:main",
-  },
-  "project.urls": {
-    "Repository": "https://github.com/YOUR_USERNAME/bugbounty-mcp",
-    "Documentation": "https://github.com/YOUR_USERNAME/bugbounty-mcp#readme",
-  }
-}
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "ruff>=0.1.0",
+    "mypy>=1.7.0",
+    "pre-commit>=3.5.0",
+]
+burp = [
+    "burp-rest-api>=2.0.0",
+]
+
+[project.scripts]
+bugbounty-mcp = "bugbounty_mcp.cli:main"
+
+[project.urls]
+Repository = "https://github.com/rifqy354/garuda-mcp"
+Documentation = "https://github.com/rifqy354/garuda-mcp#readme"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false

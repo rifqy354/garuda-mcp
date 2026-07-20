@@ -56,7 +56,7 @@ class GraphQLScannerTool(BaseTool):
                                 target=endpoint,
                                 url=endpoint,
                                 description="GraphQL introspection is enabled, allowing discovery of schema",
-                                poc=f"curl -X POST {endpoint} -H 'Content-Type: application/json' -d '{{\"query\": \"{{ __schema {{ types {{ name }} }} }}\"}}"',
+                                poc="curl -X POST " + endpoint + " -H \"Content-Type: application/json\" -d \x27{\x22query\x22: \x22__schema\x22}\x27",
                             ))
                 except Exception as e:
                     self.logger.debug(f"Introspection test failed: {e}")
